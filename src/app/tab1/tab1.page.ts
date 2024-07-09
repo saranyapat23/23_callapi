@@ -6,7 +6,24 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+users : any = [ ];
+isloading = false;
+  constructor() {
+    this.getdata();
+  }
 
-  constructor() {}
+  async getdata(){
+    this.isloading = true
+    const _users = await
+     fetch('https://jsonplaceholder.typicode.com/todos/')
+      .then((res) => res.json())
+      .then((json) => {
+        return json;
+      });
+      
+      this.isloading = false;
+      this.users = _users;
+      console.log(this.isloading);
+  }
 
 }
